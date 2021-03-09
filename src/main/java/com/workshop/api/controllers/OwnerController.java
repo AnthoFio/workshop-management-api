@@ -1,11 +1,11 @@
 package com.workshop.api.controllers;
 
 import com.workshop.api.models.Owner;
+import com.workshop.api.models.Vehicle;
 import com.workshop.api.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,4 +20,20 @@ public class OwnerController {
         return ownerRepository.findAll();
     }
 
+    @GetMapping
+    @RequestMapping("{id}")
+    public Owner get(@PathVariable Long id){
+        return ownerRepository.getOne(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Owner create(@RequestBody final Owner owner){
+        return ownerRepository.saveAndFlush(owner);
+    }
+
+    @RequestMapping(value ="{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id){
+        ownerRepository.deleteById(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.workshop.api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity(name = "owners")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Owner {
 
     @Id
